@@ -1,0 +1,70 @@
+<form #feedbackForm="ngForm" (ngSubmit)="onSubmit(feedbackForm)">
+    <div>
+      <label for="studentName">Student Name:</label>
+      <input
+        type="text"
+        id="studentName"
+        name="studentName"
+        ngModel
+        required
+        minlength="2"
+        #studentName="ngModel"
+      />
+      <div *ngIf="studentName.invalid && (studentName.dirty || studentName.touched)">
+        <small *ngIf="studentName">Name is required.</small>
+        <small *ngIf="studentName.errors">Name must be at least 2 characters long.</small>
+      </div>
+    </div>
+  
+    <div>
+      <label for="batchNo">Batch No:</label>
+      <input
+        type="number"
+        id="batchNo"
+        name="batchNo"
+        ngModel
+        required
+        min="1"
+        #batchNo="ngModel"
+      />
+      <div *ngIf="batchNo.invalid && (batchNo.dirty || batchNo.touched)">
+        <small *ngIf="batchNo">Batch number is required.</small>
+        <small *ngIf="batchNo">Batch number must be greater than 0.</small>
+      </div>
+    </div>
+  
+    <div>
+      <label for="feedback">Feedback:</label>
+      <textarea
+        id="feedback"
+        name="feedback"
+        ngModel
+        required
+        minlength="5"
+        #feedback="ngModel"
+      ></textarea>
+      <div *ngIf="feedback.invalid && (feedback.dirty||feedback.touched)">
+        <small *ngIf="feedback">Feedback is required.</small>
+        <small *ngIf="feedback">Feedback must be at least 5 characters long.</small>
+      </div>
+    </div>
+  
+    <button type="submit" >Submit Feedback</button>
+  </form>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Batch No</th>
+        <th>Feedback</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let feedback of feedbacks">
+        <td>{{ feedback.studentName }}</td>
+        <td>{{ feedback.batchNo }}</td>
+        <td>{{ feedback.feedback }}</td>
+      </tr>
+    </tbody>
+  </table>
